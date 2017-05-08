@@ -16,6 +16,7 @@
   import Topbar from './components/Topbar'
   import ResumeEditor from './components/ResumeEditor'
   import ResumePreview from './components/ResumePreview'
+  import icons from './assets/icon'
 
   export default {
     name: 'app',
@@ -24,36 +25,56 @@
           text: '你好'
         }
     },
-  components: {Topbar, ResumeEditor, ResumePreview}
+    components: {Topbar, ResumeEditor, ResumePreview},
+    created(){
+      document.body.insertAdjacentHTML('afterbegin', icons)
+    }
   }
 </script>
 
-<style>
+<style lang="scss">
+  ol, ul, li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  svg.icon{
+    height: 1em;
+    width: 1em;
+    fill: currentColor;
+    vertical-align: -0.1em;
+    font-size: 16px;
+  }
   .page{
     height:100vh;
     display: flex;
     flex-direction: column;
     background-color: #EAEBEC;
+    >main{
+      flex-grow: 1;
+    }
+    >main{
+      min-width: 1024px;
+      max-width: 1440px;
+      margin-top: 16px;
+      margin-bottom:16px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+      width: 100%;
+      align-self: center;
+      box-sizing: border-box;
+    }
   }
-  .page>main{
-    flex-grow: 1;
-    min-width: 1024px;
-    max-width: 1440px;
-    margin-top: 16px;
-    margin-bottom:16px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
-    width: 100%;
-    align-self: center;
-    box-sizing: border-box;
-  }
+
 
   #resumeEditor{
     width: 35%;
+    background-color: #444;
   }
   #resumePreview{
     flex-grow: 1;
     margin-left: 16px;
+    background-color: #777;
   }
 </style>
