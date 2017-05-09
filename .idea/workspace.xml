@@ -4,13 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/components/ResumeEditor.vue" line="62" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="100659bb-3deb-4cba-806a-05d562342e87" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ResumeEditor.vue" afterPath="$PROJECT_DIR$/src/components/ResumeEditor.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ResumePreview.vue" afterPath="$PROJECT_DIR$/src/components/ResumePreview.vue" />
-    </list>
+    <list default="true" id="100659bb-3deb-4cba-806a-05d562342e87" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -342,15 +336,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1494162220747</updated>
-      <workItem from="1494162225428" duration="40422000" />
+      <workItem from="1494162225428" duration="40625000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40422000" />
+    <option name="totallyTimeSpent" value="40625000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="818" y="39" width="594" height="487" extended-state="0" />
+    <frame x="818" y="39" width="594" height="487" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29411766" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
