@@ -100,7 +100,7 @@
       > h2:first-child{
         background-color: #ddd;
         display: inline-block;
-        padding: 2em;
+        padding: .2em;
         margin-bottom: .5em;
       }
     }
