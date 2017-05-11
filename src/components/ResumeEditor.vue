@@ -2,7 +2,7 @@
   <div id="resumeEditor">
     <nav>
       <ol>
-        <li v-for="item in resume.config"
+        <li v-for="item in resumeConfig"
         :class="{active: item.field === selected}"
         @click = "selected = item.field">
           <svg class="icon">
@@ -12,23 +12,21 @@
       </ol>
     </nav>
     <ol class="panels">
-      <li v-for="item in resume.config" v-show="item.field === selected">
-        <div v-if="resume[item.field] instanceof Array">
+      <li v-for="item in resumeConfig" v-show="item.field === selected">
+        <div v-if="item.type === 'array'">
           <div class="subitem" v-for="(subitem, i) in resume[item.field]">
+            <button class="button" @click="removeResumeSubfield(item.field, i)">-</button>
             <div class="resumeField" v-for="(value,key) in subitem">
               <label> {{key}} </label>
               <input type="text" :value="value" @input="changeResumeField(resume[item.field][i], key, $event.target.value)">
-              <!--@input="submit[key] = $event.target.value"-->
             </div>
             <hr>
           </div>
+          <button class="button" @click="addResumeSubfield(item.field)">+</button>
         </div>
         <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-
           <label> {{key}} </label>
           <input type="text" :value="value" @input="changeResumeField(resume[item.field], key, $event.target.value)">
-          <!--@input="resume[item.field][key] = $event.target.value-->
-          <!--@input="changeResumeField(item.field, key, $event.target.value-->
         </div>
       </li>
     </ol>
@@ -36,6 +34,8 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+
   export default{
     name: 'ResumeEditor',
     computed: {
@@ -51,15 +51,24 @@
       resume(){
         return this.$store.state.resume
       },
+      resumeConfig(){
+        return this.$store.state.resumeConfig
+      }
     },
     methods: {
-        changeResumeField(field, subfield, value){
-            this.$store.commit('updateResume', {
-              field,
-              subfield,
-              value
-            })
-        }
+      changeResumeField(field, subfield, value){
+        this.$store.commit('updateResume', {
+          field,
+          subfield,
+          value
+        })
+      },
+      addResumeSubfield(field){
+        this.$store.commit('addResumeSubfield', {field})
+      },
+      removeResumeSubfield(field, index){
+        this.$store.commit('removeResumeSubfield', {field, index})
+      }
     }
   }
 </script>
