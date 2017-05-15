@@ -1,32 +1,18 @@
 <template>
   <div>
-    <div class="page">
-      <header>
-        <Topbar/>
-      </header>
-      <main>
-        <ResumeEditor/>
-        <ResumePreview/>
-      </main>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   import 'normalize.css/normalize.css'
 
-  import Topbar from './components/Topbar'
-  import ResumeEditor from './components/ResumeEditor'
-  import ResumePreview from './components/ResumePreview'
   import icons from './assets/icon'
-  import store from './store/index'
   import AV from './lib/leancloud'
   import getAVUser from './lib/getAVUser'
 
   export default {
     name: 'app',
-    store,
-    components: {Topbar, ResumeEditor, ResumePreview},
     created(){
       document.body.insertAdjacentHTML('afterbegin', icons)
       let state = localStorage.getItem('state')
@@ -83,5 +69,34 @@
     flex-grow: 1;
     margin-left: 16px;
     background-color: #777;
+  }
+
+  .button{
+    width: 72px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #ddd;
+    color: #222;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    &:hover{
+      box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);
+    }
+    &.primary{
+      background-color: #02af5f;
+      color: white;
+    }
+    &.small{
+      height: 24px;
+      font-size: inherit;
+      width: auto;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
   }
 </style>

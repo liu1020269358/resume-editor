@@ -12,8 +12,6 @@
           <a href="#" class="button primary" @click.prevent=" signUpDialogVisible = true">注册</a>
           <a href="#" class="button" @click.prevent="signInDialogVisible = true">登录</a>
         </div>
-        <button class="button primary">保存</button>
-        <button class="button">预览</button>
       </div>
     </div>
     <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
@@ -92,27 +90,6 @@
     }
   }
 
-  .button{
-    width: 72px;
-    height: 32px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    background-color: #ddd;
-    color: #222;
-    text-decoration: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-    &:hover{
-      box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);
-    }
-    &.primary{
-      background-color: #02af5f;
-      color: white;
-    }
-  }
   .actions{
     display: flex;
     .userActions{

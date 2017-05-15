@@ -10,45 +10,30 @@ export default new Vuex.Store({
       id: '',
       username: ''
     },
+    resumeConfig: [
+      { field: 'profile', icon: 'id', keys: ['name', 'city', 'title', 'birthday']},
+      { field: 'workHistory', icon: 'work', type: 'array', keys: ['company', 'details']},
+      { field: 'education', icon: 'book', type: 'array', keys: ['school', 'details']},
+      { field: 'projects', icon: 'heart', type: 'array', keys: ['name', 'details']},
+      { field: 'awards', icon: 'cup', type: 'array', keys: ['name', 'details']},
+      { field: 'contacts', icon: 'phone', type: 'array', keys: ['contact', 'content']},
+    ],
     resume: {
-      config: [
-        { field: 'profile', icon: 'id' },
-        { field: 'workHistory', icon: 'work' },
-        { field: 'education', icon: 'book' },
-        { field: 'projects', icon: 'heart' },
-        { field: 'awards', icon: 'cup' },
-        { field: 'contacts', icon: 'phone' },
-      ],
-      profile: {
-        name: '名字',
-        city: '城市',
-        title: '头衔',
-        birthday: '生日',
-      },
-      workHistory: [
-        { company: 'AL', content: '我的第二份工作是' },
-        { company: 'TX', content: '我的第一份工作是' },
-      ],
-      education: [
-        { school: 'AL', content: '文字' },
-        { school: 'TX', content: '文字' },
-      ],
-      projects: [
-        { name: 'project A', content: '文字' },
-        { name: 'project B', content: '文字' },
-      ],
-      awards: [
-        { name: 'awards A', content: '文字' },
-        { name: 'awards B', content: '文字' },
-      ],
-      contacts: [
-        { contact: 'phone', content: '13812345678' },
-        { contact: 'qq', content: '12345678' },
-      ],
+      id: ''
     }
   },
   mutations: {
     initState(state, payload){
+      state.resumeConfig.map((item) => {
+        if(item.type === 'array'){
+          Vue.set(state.resume, item.field, [])
+        }else{
+          Vue.set(state.resume, item.field, {})
+        item.keys.map((key) => {
+          Vue.set(state.resume[item.field], key, '')
+          })
+        }
+      })
       Object.assign(state, payload)
     },
     increment(state){
@@ -66,7 +51,19 @@ export default new Vuex.Store({
       Object.assign(state.user, payload)
     },
     removeUser(state){
-      state.user.id = null
-    }
+      state.user.id = ''
+    },
+    addResumeSubfield(state, {field}){
+      let empty = {}
+      state.resume[field].push(empty)
+      state.resumeConfig.filter((i) => {
+        return i.field === field
+      })[0].keys.map((key) => {
+        Vue.set(empty, key, '')
+      })
+    },
+    removeResumeSubfield(state, {field, index}){
+      state.resume[field].splice(index, 1)
+    },
   }
 })

@@ -10,7 +10,7 @@
         <input type="password" required v-model="formData.password">
       </div>
       <div class="actions">
-        <input type="submit" value="提交">
+        <input type="submit" value="提交" class="button">
         <span>{{errorMessage}}</span>
       </div>
     </form>
@@ -45,3 +45,23 @@
     }
   }
 </script>
+<style scoped lang="scss">
+  .row{
+    margin-bottom: 1em;
+    > label{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .5em;
+    }
+    > input{
+      border: 1px solid #ddd;
+      box-shadow: inset 0 1px 3px 0 rgba(0,0,0,25);
+      width: 12em;
+      height: 2em;
+      padding:0 8px;
+    }
+  }
+  .actions{
+    margin-top: 2em;
+  }
+</style>
