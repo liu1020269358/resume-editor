@@ -40,9 +40,6 @@ export default new Vuex.Store({
         Object.assign(state, payload)
       }
     },
-    increment(state){
-      state.count++
-    },
     switchTab(state, payload){
       state.selected = payload
     },

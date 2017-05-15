@@ -93,7 +93,6 @@
   .actions{
     display: flex;
     .userActions{
-      margin-right: 3em;
       .welcome{
         margin-right: .5em;
       }

@@ -26,7 +26,6 @@
           <button class="button" @click="addResumeSubfield(item.field)">新增</button>
         </div>
         <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-
           <label> {{key}} </label>
           <input type="text" :value="value" @input="changeResumeField(resume[item.field], key, $event.target.value)">
         </div>
@@ -36,6 +35,8 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+
   export default{
     name: 'ResumeEditor',
     computed: {
