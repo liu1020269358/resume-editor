@@ -1,5 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import AV from '../lib/leancloud'
+import getAVUser from '../lib/getAVUser'
 
 Vue.use(Vuex)
 
@@ -34,18 +36,19 @@ export default new Vuex.Store({
           })
         }
       })
-      Object.assign(state, payload)
+      if(payload){
+        Object.assign(state, payload)
+      }
     },
     increment(state){
       state.count++
     },
     switchTab(state, payload){
       state.selected = payload
-      localStorage.setItem('state', JSON.stringify(state))
     },
     updateResume(state, {field, subfield, value}){
       field[subfield] = value;
-      localStorage.setItem('state', JSON.stringify(state))
+      localStorage.setItem('resume', JSON.stringify(state.resume))
     },
     setUser(state, payload){
       Object.assign(state.user, payload)
@@ -65,5 +68,49 @@ export default new Vuex.Store({
     removeResumeSubfield(state, {field, index}){
       state.resume[field].splice(index, 1)
     },
+    setResumeId(state, {id}){
+      state.resume.id = id
+    },
+    setResume(state, resume){
+      state.resumeConfig.map(({field}) => {
+        Vue.set(state.resume, field, resume[field])
+      })
+    }
+  },
+  actions: {
+    saveResume({state, commit}, payload){
+      var Resume = AV.Object.extend('Resume')
+      var resume = new Resume()
+      if(state.resume.id){
+        resume.id = state.resume.id
+      }
+      resume.set('profile', state.resume.profile)
+      resume.set('workHistory', state.resume.workHistory)
+      resume.set('education', state.resume.education)
+      resume.set('projects', state.resume.projects)
+      resume.set('awards', state.resume.awards)
+      resume.set('contacts', state.resume.contacts)
+      resume.set('owner_id', getAVUser().id)
+      var acl = new AV.ACL()
+      acl.setPublicReadAccess(true)
+      acl.setWriteAccess(AV.User.current(), true)
+      resume.setACL(acl)
+      resume.save().then(function (response) {
+        if(!state.resume.id){
+          commit('setResumeId', { id: response.id})
+        }
+      }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    fetchResume({commit}, payload){
+      var query = new AV.Query('Resume')
+      query.equalTo('owner_id', getAVUser().id)
+      query.first().then((resume) => {
+        if(resume){
+          commit('setResume', {id: resume.id, ...resume.attributes})
+        }
+      })
+    }
   }
 })

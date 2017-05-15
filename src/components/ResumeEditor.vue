@@ -127,7 +127,7 @@
   }
   hr{
     border: none;
-    border-to: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     margin: 24px 0;
   }
   .subitem{
