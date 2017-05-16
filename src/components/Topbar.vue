@@ -14,17 +14,17 @@
         </div>
       </div>
     </div>
-    <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
+    <NewDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
       <SignUpForm @success="signIn($event)"/>
-    </MyDialog>
-    <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
+    </NewDialog>
+    <NewDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
       <SignInForm @success="signIn($event)"/>
-    </MyDialog>
+    </NewDialog>
   </div>
 </template>
 
 <script>
-  import MyDialog from './MyDialog'
+  import NewDialog from './NewDialog'
   import SignUpForm from './SignUpForm'
   import SignInForm from './SignInForm'
   import AV from '../lib/leancloud'
@@ -49,7 +49,7 @@
       }
     },
     components: {
-      MyDialog,
+      NewDialog,
       SignUpForm,
       SignInForm
     },

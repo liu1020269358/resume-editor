@@ -14,7 +14,7 @@
 
 <script>
   export default{
-    name: 'MyDialog',
+    name: 'Dialog',
     props: ['title', 'visible'],
     methods: {
         close(){

@@ -5,20 +5,18 @@
         <li v-for="item in resumeConfig"
         :class="{active: item.field === selected}"
         @click = "selected = item.field">
-          <svg class="icon">
-            <use :xlink:href="`#icon-${item.icon}`"></use>
-          </svg>
+          {{translateToZh(item.field)}}
         </li>
       </ol>
     </nav>
     <ol class="panels">
       <li v-for="item in resumeConfig" v-show="item.field === selected">
         <div v-if="item.type === 'array'">
-          <h2>{{item.field}}</h2>
+          <h2>{{translateToZh(item.field)}}</h2>
           <div class="subitem" v-for="(subitem, i) in resume[item.field]">
             <button class="button remove small" @click="removeResumeSubfield(item.field, i)">删除</button>
             <div class="resumeField" v-for="(value,key) in subitem">
-              <label> {{key}} </label>
+              <label> {{translateToZh(key)}} </label>
               <input type="text" :value="value" @input="changeResumeField(resume[item.field][i], key, $event.target.value)">
             </div>
             <hr>
@@ -26,7 +24,7 @@
           <button class="button" @click="addResumeSubfield(item.field)">新增</button>
         </div>
         <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-          <label> {{key}} </label>
+          <label> {{translateToZh(key)}} </label>
           <input type="text" :value="value" @input="changeResumeField(resume[item.field], key, $event.target.value)">
         </div>
       </li>
@@ -36,6 +34,7 @@
 
 <script>
   import Vue from 'vue'
+  import translate from '../lib/translate'
 
   export default{
     name: 'ResumeEditor',
@@ -54,7 +53,7 @@
       },
       resumeConfig(){
         return this.$store.state.resumeConfig
-      }
+      },
     },
     methods: {
       changeResumeField(field, subfield, value){
@@ -69,6 +68,9 @@
       },
       removeResumeSubfield(field, index){
         this.$store.commit('removeResumeSubfield', {field, index})
+      },
+      translateToZh(en){
+        return translate(en);
       }
     }
   }
@@ -107,10 +109,6 @@
           margin-bottom: 24px;
         }
       }
-    }
-    svg.icon{
-      width: 24px;
-      height: 24px;
     }
   }
   .resumeField{
