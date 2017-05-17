@@ -1,3 +1,4 @@
+<!--编辑区，实际就是一个tab组件-->
 <template>
   <div id="resumeEditor">
     <nav>
@@ -11,10 +12,11 @@
     </nav>
     <ol class="panels">
       <li v-for="item in resumeConfig" v-show="item.field === selected">
-        <div v-if="item.type === 'array'">
+        <!--可扩增的标签页内容和不可扩增的标签页内容要分别处理-->
+        <div v-if="item.type === 'active'">
           <h2>{{translateToZh(item.field)}}</h2>
           <div class="subitem" v-for="(subitem, i) in resume[item.field]">
-            <button class="button remove small" @click="removeResumeSubfield(item.field, i)">删除</button>
+            <button class="button btn-remove btn-small" @click="removeResumeSubfield(item.field, i)">删除</button>
             <div class="resumeField" v-for="(value,key) in subitem">
               <label> {{translateToZh(key)}} </label>
               <input type="text" :value="value" @input="changeResumeField(resume[item.field][i], key, $event.target.value)">
@@ -23,6 +25,7 @@
           </div>
           <button class="button" @click="addResumeSubfield(item.field)">新增</button>
         </div>
+
         <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
           <label> {{translateToZh(key)}} </label>
           <input type="text" :value="value" @input="changeResumeField(resume[item.field], key, $event.target.value)">
@@ -39,6 +42,7 @@
   export default{
     name: 'ResumeEditor',
     computed: {
+      //由于使用了Vuex，所以要改变selected的getter和setter
       selected: {
         get(){
           return this.$store.state.selected
@@ -69,6 +73,7 @@
       removeResumeSubfield(field, index){
         this.$store.commit('removeResumeSubfield', {field, index})
       },
+      //将英文翻译成中文的方法
       translateToZh(en){
         return translate(en);
       }
@@ -131,7 +136,7 @@
   }
   .subitem{
     position: relative;
-    .button.remove{
+    .button.btn-remove{
       position: absolute;
       right: 0;
       top: -3px;

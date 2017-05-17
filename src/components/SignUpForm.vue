@@ -9,7 +9,7 @@
         <label>密码</label>
         <input type="password" v-model="formData.password" required>
       </div>
-      <div class="actions">
+      <div class="submit">
         <input type="submit" value="提交" class="button">
         <span class="errorMessage">{{errorMessage}}</span>
       </div>
@@ -34,6 +34,7 @@
       }
     },
     methods:{
+      //注册成功后，触发success事件，立即登录
       signUp(){
         let {username, password} = this.formData
         var user = new AV.User();
@@ -49,23 +50,24 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
   .row{
     margin-bottom: 1em;
-      > label{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: .5em;
-      }
-      > input{
-        border: 1px solid #ddd;
-        box-shadow: inset 0 1px 3px 0 rgba(0,0,0,25);
-        width: 12em;
-        height: 2em;
-        padding:0 8px;
-      }
+
   }
-  .actions{
+  .row label{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5em;
+  }
+  .row input{
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 3px 0 rgba(0,0,0,25);
+    width: 12em;
+    height: 2em;
+    padding:0 8px;
+  }
+  .submit{
     margin-top: 2em;
   }
 </style>

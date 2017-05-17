@@ -3,6 +3,7 @@
     <div class="dialog">
       <header>
         {{title}}
+        <!--点击触发close事件，该事件在父组件Topbar里被定义-->
         <span class="close" @click="close">X</span>
       </header>
       <main>

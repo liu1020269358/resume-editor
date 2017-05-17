@@ -6,18 +6,20 @@
 
 <script>
   import 'normalize.css/normalize.css'
-
-  import icons from './assets/icon'
   import AV from './lib/leancloud'
   import getAVUser from './lib/getAVUser'
-
-  document.body.insertAdjacentHTML('afterbegin', icons)
 
   export default {
     name: 'app',
     created(){
+      /*
+        在载入页面后，初始化用户数据结构
+        然后判断用户是否已登录。
+        若已登录，则从后台读取resume
+        若未登录，则从localStorage读取resume
+      */
       this.$store.commit('initState')
-      let user = getAVUser()
+      let user = getAVUser() //获取当前用户
       this.$store.commit('setUser', user)
       if(user.id){
         this.$store.dispatch('fetchResume').then(() => {
@@ -33,46 +35,36 @@
         if(resume){
           this.$store.commit('setResume', JSON.parse(resume))
         }
-      }
+      },
     }
   }
 </script>
 
-<style lang="scss">
+<style>
   ol, ul, li{
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-  svg.icon{
-    height: 1em;
-    width: 1em;
-    fill: currentColor;
-    vertical-align: -0.1em;
-    font-size: 16px;
   }
   .page{
     height:100vh;
     display: flex;
     flex-direction: column;
     background-color: #EAEBEC;
-    >main{
-      flex-grow: 1;
-    }
-    >main{
-      min-width: 1024px;
-      max-width: 1440px;
-      margin-top: 16px;
-      margin-bottom:16px;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 16px;
-      width: 100%;
-      align-self: center;
-      box-sizing: border-box;
-    }
   }
-
+  .page>main{
+    flex-grow: 1;
+    min-width: 1024px;
+    max-width: 1440px;
+    margin-top: 16px;
+    margin-bottom:16px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    width: 100%;
+    align-self: center;
+    box-sizing: border-box;
+  }
 
   #resumeEditor{
     min-width: 35%;
@@ -97,19 +89,19 @@
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-    &:hover{
-      box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);
-    }
-    &.primary{
-      background-color: #02af5f;
-      color: white;
-    }
-    &.small{
-      height: 24px;
-      font-size: inherit;
-      width: auto;
-      padding-left: 1em;
-      padding-right: 1em;
-    }
+  }
+  .button:hover{
+    box-shadow: 1px 1px 1px hsla(0, 0, 0, 0.50);
+  }
+  .btn-primary{
+    background-color: #02af5f;
+    color: white;
+  }
+  .btn-small{
+    height: 24px;
+    font-size: inherit;
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 </style>

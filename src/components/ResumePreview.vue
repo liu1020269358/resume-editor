@@ -1,7 +1,9 @@
 <template>
   <div id="resumePreview">
+    <!--用户点击保存，则将resume保存到服务器上-->
     <button class="button" @click="save"> 保存 </button>
-
+    <!--用户如果忽略某一大项内容，比如“教育”，那么不会在预览中出现。
+    在用户没有任何操作之前，预览页面应当是空白的-->
     <section data-name="profile" v-if="resume.profile && resume.profile.name">
       <h1>
         {{resume.profile.name}}
@@ -27,9 +29,8 @@
       <h2>毕业院校</h2>
       <ol>
         <li v-for="item in resume.education">
-          <h3>{{item.school}}
-            <span v-show="item.details"> - {{item.details}} </span>
-          </h3>
+          <h3>{{item.school}}</h3>
+          <span v-show="item.details"> {{item.details}} </span>
         </li>
       </ol>
     </section>
@@ -126,7 +127,6 @@
       }
       li{
         h3{
-          border-bottom: 1px solid #999;
           padding-bottom: .3em;
           margin-bottom: .3em;
         }

@@ -1,3 +1,5 @@
+//初始化AV
+
 import AV from 'leancloud-storage'
 
 var APP_ID = 'lUJblxWpbwKUQBE6DXJMi50B-gzGzoHsz'
