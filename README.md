@@ -1,27 +1,22 @@
-# resume-editor
-
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+# 在线简历编辑器
+##介绍
+* 一款基于Vue的在线简历编辑器
+* 利用Vue双向绑定的特性，实现实时预览
+* 使用leancloud作为后台，使用其提供的API来实现登录，注册，保存至后台等功能
+* 使用了localStorage实时本地保存
+* 使用了Vuex实现状态管理，提升代码的维护性。但这个优点由于本项目比较简单，优势不明显
+##组件的结构
+```javascript
+{
+    resume: {
+        topbar: {
+            dialog: {
+                signIn
+                signUp
+            }
+        },
+        resumeEditor,
+        resumePreview
+    }
+}
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
